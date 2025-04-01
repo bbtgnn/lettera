@@ -46,19 +46,16 @@ export function disegnaPunto({
   push();
   translate(x, y);
   rotate(frameCount);
-  image(img, 0, 0, 100, 100);
+  strokeWeight(4);
+  drawStar(0, 0, 3, 50, 10);
   pop();
 }
-
-let img;
 
 /**
  * Carica le risorse necessarie
  * Esempio: carica immagini, suoni, ecc.
  */
-export function caricamentoRisorse() {
-  img = loadImage("./assets/image.png");
-}
+export function caricamentoRisorse() {}
 
 /**
  * Imposta le impostazioni iniziali
@@ -68,7 +65,6 @@ export function impostazioni() {
   frameRate(30);
   angleMode(DEGREES);
   rectMode(CENTER);
-  imageMode(CENTER);
 }
 
 /**
@@ -93,13 +89,21 @@ export function sopra(disegnaTesto) {
   // disegnaTesto();
 }
 
-function disegnaPoligono(cx, cy, raggio, lati) {
+//
+
+function drawStar(x, y, points, radius, innerRadius = radius / 2) {
+  let angle = 360 / points;
+  let halfAngle = angle / 2;
+
   beginShape();
-  for (let i = 0; i < lati; i++) {
-    let angolo = (360 * i) / lati;
-    let x = cx + cos(angolo) * raggio;
-    let y = cy + sin(angolo) * raggio;
-    vertex(x, y);
+  for (let a = 0; a < 360; a += angle) {
+    let sx = x + cos(a) * radius;
+    let sy = y + sin(a) * radius;
+    vertex(sx, sy);
+
+    let sxInner = x + cos(a + halfAngle) * innerRadius;
+    let syInner = y + sin(a + halfAngle) * innerRadius;
+    vertex(sxInner, syInner);
   }
   endShape(CLOSE);
 }
