@@ -9,7 +9,7 @@ export const configurazione = {
   sensibilitàMicrofonoBase: 1,
   densitàPuntiBase: 1,
 
-  nascondiInterfaccia: false,
+  nascondiInterfaccia: true,
 };
 
 /**
@@ -46,7 +46,9 @@ export function disegnaPunto({
   translate(x, y);
   rotate(frameCount);
   noStroke();
-  ellipse(0, 0, 40, 10);
+  stroke("black");
+  strokeWeight(3);
+  disegnaPoligono(0, 0, 40, 6);
   pop();
 }
 
@@ -85,4 +87,17 @@ export function sopra(disegnaTesto) {
   // [INFO] Rimuovi il commento per disegnare il testo
   // fill("black");
   // disegnaTesto();
+}
+
+//
+
+function disegnaPoligono(cx, cy, raggio, lati) {
+  beginShape();
+  for (let i = 0; i < lati; i++) {
+    let angolo = (360 * i) / lati;
+    let x = cx + cos(angolo) * raggio;
+    let y = cy + sin(angolo) * raggio;
+    vertex(x, y);
+  }
+  endShape(CLOSE);
 }
