@@ -1,10 +1,10 @@
 export const configurazione = {
-  testo: "A",
+  testo: "g",
 
   dimensione: 0.8,
   interlinea: 0.7,
   allineamento: "centro",
-  percorsoFont: "./assets/InputMonoCondensed-BoldItalic.ttf",
+  percorsoFont: "./assets/SoleSerifDisplay-HairlineItalic.otf",
 
   sensibilitàMicrofonoBase: 1,
   densitàPuntiBase: 1,
@@ -45,6 +45,7 @@ export function disegnaPunto({
   push();
   translate(x, y);
   rotate(frameCount);
+  noStroke();
   ellipse(0, 0, 40, 10);
   pop();
 }
