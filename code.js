@@ -1,5 +1,5 @@
 export const configurazione = {
-  testo: "G",
+  testo: "A",
 
   dimensione: 0.8,
   interlinea: 0.7,
@@ -42,18 +42,10 @@ export function disegnaPunto({
   beta = 0,
   gamma = 0,
 }) {
-  const size = sin((frameCount + indice) * 6) * ((volume * unita) / 2) * unita;
-
-  if (indice % 2 == 0) {
-    fill("black");
-  } else {
-    fill("white");
-  }
-  noStroke();
-
   push();
   translate(x, y);
-  ellipse(0, 0, size);
+  rotate(frameCount);
+  ellipse(0, 0, 40, 10);
   pop();
 }
 
