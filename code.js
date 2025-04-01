@@ -9,7 +9,7 @@ export const configurazione = {
   sensibilitàMicrofonoBase: 1,
   densitàPuntiBase: 1,
 
-  nascondiInterfaccia: false,
+  nascondiInterfaccia: true,
 };
 
 /**
@@ -42,19 +42,23 @@ export function disegnaPunto({
   beta = 0,
   gamma = 0,
 }) {
+  stroke("black");
   push();
   translate(x, y);
   rotate(frameCount);
-  noStroke();
-  ellipse(0, 0, 40, 10);
+  image(img, 0, 0, 100, 100);
   pop();
 }
+
+let img;
 
 /**
  * Carica le risorse necessarie
  * Esempio: carica immagini, suoni, ecc.
  */
-export function caricamentoRisorse() {}
+export function caricamentoRisorse() {
+  img = loadImage("./assets/image.png");
+}
 
 /**
  * Imposta le impostazioni iniziali
@@ -63,6 +67,8 @@ export function caricamentoRisorse() {}
 export function impostazioni() {
   frameRate(30);
   angleMode(DEGREES);
+  rectMode(CENTER);
+  imageMode(CENTER);
 }
 
 /**
@@ -70,7 +76,7 @@ export function impostazioni() {
  * @param {function} disegnaTesto - La funzione che disegna il testo
  */
 export function sotto(disegnaTesto) {
-  background("deeppink");
+  background(30, 100, 100);
 
   // [INFO] Rimuovi il commento per disegnare il testo
   fill("white");
@@ -85,4 +91,15 @@ export function sopra(disegnaTesto) {
   // [INFO] Rimuovi il commento per disegnare il testo
   // fill("black");
   // disegnaTesto();
+}
+
+function disegnaPoligono(cx, cy, raggio, lati) {
+  beginShape();
+  for (let i = 0; i < lati; i++) {
+    let angolo = (360 * i) / lati;
+    let x = cx + cos(angolo) * raggio;
+    let y = cy + sin(angolo) * raggio;
+    vertex(x, y);
+  }
+  endShape(CLOSE);
 }
